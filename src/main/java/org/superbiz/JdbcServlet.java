@@ -10,6 +10,7 @@ import jakarta.annotation.Resource;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.io.Serial;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -27,7 +28,10 @@ public class JdbcServlet extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 
 		try(final Connection connection = dataSource.getConnection()){
-			
+			writer.println("Metadata at: " + connection.getMetaData().getUserName());
+			writer.println("Metadata at: " + connection.getMetaData().getDriverName());
+			writer.println("Metadata at: " + connection.getMetaData().getDriverVersion());
+
 			boolean valid = connection.isValid(1000);
 			writer.println("\n JDBC Connection is " + (valid ? "valid" : "NOT valid") + " @ timestamp = "+ System.currentTimeMillis());
 			
