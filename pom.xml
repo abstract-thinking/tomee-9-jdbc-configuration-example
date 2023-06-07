@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.superbiz</groupId>
+	<artifactId>jdbc-servlet</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>JDBC Servlet Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.tomee</groupId>
+			<artifactId>jakartaee-api</artifactId>
+			<version>9.1.1</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>jdbc-servlet</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomee.maven</groupId>
+				<artifactId>tomee-maven-plugin</artifactId>
+				<version>9.0.0</version>
+				<configuration>
+					<libs>
+						<lib>org.apache.derby:derby:10.14.2.0</lib>
+					</libs>
+					<tomeeClassifier>plume</tomeeClassifier>
+					<args>-Xmx512m</args>
+					<removeDefaultWebapps>false</removeDefaultWebapps>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
